@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sancia Ann Sabu | Portfolio</title>
+  <meta name="description" content="Premium personal portfolio website for Sancia Ann Sabu." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Theme and reset */
+    :root {
+      --bg: #06111f;
+      --bg-soft: #0b1b30;
+      --panel: rgba(255, 255, 255, 0.08);
+      --panel-strong: rgba(255, 255, 255, 0.13);
+      --text: #f7efdF;
+      --muted: #c8c1b4;
+      --gold: #c7a65b;
+      --gold-soft: #ead8a2;
+      --line: rgba(234, 216, 162, 0.2);
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+      --radius: 8px;
+      color-scheme: dark;
+    }
+
+    body.light {
+      --bg: #f7f1e8;
+      --bg-soft: #fffaf2;
+      --panel: rgba(10, 26, 45, 0.07);
+      --panel-strong: rgba(10, 26, 45, 0.1);
+      --text: #071525;
+      --muted: #536070;
+      --gold: #9a7330;
+      --gold-soft: #6e501e;
+      --line: rgba(154, 115, 48, 0.24);
+      --shadow: 0 22px 60px rgba(27, 38, 58, 0.16);
+      color-scheme: light;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(199, 166, 91, 0.18), transparent 28rem),
+        radial-gradient(circle at 85% 10%, rgba(79, 139, 174, 0.18), transparent 24rem),
+        linear-gradient(145deg, var(--bg), var(--bg-soft));
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background 400ms ease, color 400ms ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .page-shell {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      z-index: 20;
+      top: 18px;
+      left: 50%;
+      width: min(1120px, calc(100% - 32px));
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 14px 12px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(6, 17, 31, 0.66);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 14px 44px rgba(0, 0, 0, 0.18);
+    }
+
+    body.light .nav {
+      background: rgba(247, 241, 232, 0.72);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      color: var(--gold-soft);
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      transition: color 180ms ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-soft);
+    }
+
+    .theme-toggle {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--panel);
+      color: var(--text);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold);
+      background: var(--panel-strong);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      align-items: center;
+      padding: 132px 0 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flight-map {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.58;
+      pointer-events: none;
+    }
+
+    .flight-map svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .path-line {
+      stroke-dasharray: 8 14;
+      animation: travel 9s linear infinite;
+    }
+
+    @keyframes travel {
+      to { stroke-dashoffset: -220; }
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(290px, 0.72fr);
+      gap: 64px;
+      align-items: center;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: var(--gold-soft);
+      font-weight: 700;
+      font-size: 0.76rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 38px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .hero-name {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(3.2rem, 8vw, 7.4rem);
+      font-weight: 700;
+      max-width: 10ch;
+      margin-bottom: 24px;
+    }
+
+    .hero h2 {
+      font-size: clamp(1.55rem, 3vw, 3rem);
+      max-width: 760px;
+      margin-bottom: 18px;
+      color: var(--gold-soft);
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.7vw, 1.18rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--gold);
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease, border-color 180ms ease;
+    }
+
+    .button.primary {
+      background: var(--gold);
+      color: #06111f;
+    }
+
+    .button.secondary {
+      color: var(--gold-soft);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
+    }
+
+    .portrait-card {
+      position: relative;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, var(--panel-strong), rgba(255, 255, 255, 0.03));
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow);
+    }
+
+    .portrait {
+      aspect-ratio: 4 / 5;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, #20344f, #b99a55);
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .portrait img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 18%;
+      opacity: 0;
+      transition: opacity 260ms ease;
+    }
+
+    .portrait.has-photo img {
+      opacity: 1;
+    }
+
+    .portrait.has-photo::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(rgba(6, 17, 31, 0.02), rgba(6, 17, 31, 0.22));
+    }
+
+    .portrait::after {
+      content: "SAS";
+      width: 108px;
+      height: 108px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(234, 216, 162, 0.52);
+      border-radius: 50%;
+      background: rgba(6, 17, 31, 0.48);
+      color: #f7efdf;
+      font-family: "Playfair Display", serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+
+    .portrait.has-photo::after {
+      display: none;
+    }
+
+    .portrait-note {
+      position: absolute;
+      right: 28px;
+      bottom: 28px;
+      max-width: 190px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(6, 17, 31, 0.68);
+      backdrop-filter: blur(12px);
+      color: #f7efdf;
+      font-size: 0.78rem;
+    }
+
+    /* Shared sections */
+    section {
+      padding: 96px 0;
+    }
+
+    .section-heading {
+      display: grid;
+      gap: 12px;
+      max-width: 760px;
+      margin-bottom: 34px;
+    }
+
+    .section-heading h2 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(2rem, 4vw, 4rem);
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .glass {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* About */
+    .about-layout {
+      display: grid;
+      grid-template-columns: 0.78fr 1.22fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .about-stat {
+      padding: 30px;
+      display: grid;
+      align-content: end;
+      min-height: 280px;
+      background:
+        linear-gradient(145deg, rgba(199, 166, 91, 0.22), transparent),
+        var(--panel);
+    }
+
+    .about-stat strong {
+      display: block;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: 0.9;
+      color: var(--gold-soft);
+    }
+
+    .about-copy {
+      padding: 34px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .about-copy p + p {
+      margin-top: 18px;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 20px;
+      top: 16px;
+      bottom: 16px;
+      width: 1px;
+      background: var(--line);
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 18px;
+    }
+
+    .timeline-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      background: var(--bg);
+      display: grid;
+      place-items: center;
+      color: var(--gold-soft);
+      font-weight: 800;
+      z-index: 1;
+    }
+
+    .timeline-card {
+      padding: 26px;
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .timeline-card:hover {
+      transform: translateX(6px);
+      background: var(--panel-strong);
+    }
+
+    .timeline-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 8px;
+    }
+
+    .timeline-card p,
+    .timeline-card li {
+      color: var(--muted);
+    }
+
+    .timeline-card ul {
+      display: grid;
+      gap: 7px;
+      margin-top: 12px;
+      padding-left: 18px;
+    }
+
+    /* Experience */
+    .experience-card {
+      display: grid;
+      grid-template-columns: 0.78fr 1.22fr;
+      overflow: hidden;
+    }
+
+    .experience-title {
+      padding: 34px;
+      background:
+        linear-gradient(160deg, rgba(199, 166, 91, 0.24), transparent 70%),
+        rgba(255, 255, 255, 0.04);
+      border-right: 1px solid var(--line);
+    }
+
+    .experience-title span {
+      color: var(--gold-soft);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.78rem;
+    }
+
+    .experience-title h3 {
+      margin-top: 18px;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      font-family: "Playfair Display", Georgia, serif;
+    }
+
+    .experience-details {
+      padding: 34px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .pill {
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--gold-soft);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .impact {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--muted);
+    }
+
+    .impact strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .skill {
+      padding: 20px;
+      min-height: 170px;
+      display: grid;
+      align-content: space-between;
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .skill:hover {
+      transform: translateY(-5px);
+      background: var(--panel-strong);
+    }
+
+    .skill h3 {
+      font-size: 1rem;
+    }
+
+    .skill-bar {
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+      transition: width 1100ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .visible .skill-fill {
+      width: var(--level);
+    }
+
+    /* Interests */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .interest-card {
+      min-height: 210px;
+      padding: 22px;
+      display: grid;
+      align-content: end;
+      position: relative;
+      overflow: hidden;
+      transition: transform 220ms ease, border-color 220ms ease;
+    }
+
+    .interest-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 10%, rgba(234, 216, 162, 0.24), transparent 36%),
+        linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.16));
+      opacity: 0.72;
+      transition: transform 300ms ease;
+    }
+
+    .interest-card:hover {
+      transform: translateY(-7px);
+      border-color: var(--gold);
+    }
+
+    .interest-card:hover::before {
+      transform: scale(1.12);
+    }
+
+    .interest-card h3,
+    .interest-card p {
+      position: relative;
+    }
+
+    .interest-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+    }
+
+    .interest-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* Accordion */
+    .accordion {
+      display: grid;
+      gap: 12px;
+    }
+
+    .accordion-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      overflow: hidden;
+    }
+
+    .accordion-button {
+      width: 100%;
+      min-height: 64px;
+      padding: 0 22px;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      text-align: left;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .accordion-icon {
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--gold-soft);
+      transition: transform 220ms ease;
+    }
+
+    .accordion-item.active .accordion-icon {
+      transform: rotate(45deg);
+    }
+
+    .accordion-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 260ms ease;
+    }
+
+    .accordion-panel p {
+      padding: 0 22px 22px;
+      color: var(--muted);
+      max-width: 820px;
+    }
+
+    /* Aspirations and contact */
+    .aspiration {
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .aspiration h2 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(2rem, 4vw, 4rem);
+    }
+
+    .aspiration p {
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .contact-card {
+      padding: 22px;
+      min-height: 130px;
+      display: grid;
+      align-content: space-between;
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      background: var(--panel-strong);
+    }
+
+    .contact-card span {
+      color: var(--gold-soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .contact-card strong {
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      padding: 42px 0 54px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+
+    footer p {
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    /* Responsive rules */
+    @media (max-width: 940px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-grid,
+      .about-layout,
+      .experience-card,
+      .aspiration {
+        grid-template-columns: 1fr;
+      }
+
+      .experience-title {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .skills-grid,
+      .cards-grid,
+      .contact-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .hero {
+        padding-top: 112px;
+      }
+
+      .brand span {
+        display: none;
+      }
+
+      .hero-actions,
+      .pill-row {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      section {
+        padding: 72px 0;
+      }
+
+      .about-copy,
+      .about-stat,
+      .experience-title,
+      .experience-details,
+      .aspiration {
+        padding: 24px;
+      }
+
+      .impact-grid,
+      .skills-grid,
+      .cards-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        grid-template-columns: 44px 1fr;
+        gap: 12px;
+      }
+
+      .timeline-dot {
+        width: 36px;
+        height: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <!-- Navigation -->
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Sancia Ann Sabu home">
+        <span class="brand-mark">S</span>
+        <span>Sancia Ann Sabu</span>
+      </a>
+      <div class="nav-links" aria-label="Section links">
+        <a href="#about">About</a>
+        <a href="#journey">Journey</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="theme-toggle" type="button" aria-label="Toggle light mode" title="Toggle theme">
+        <span aria-hidden="true">◐</span>
+      </button>
+    </nav>
+
+    <!-- Hero section -->
+    <header class="hero" id="top">
+      <div class="flight-map" aria-hidden="true">
+        <svg viewBox="0 0 1440 900" preserveAspectRatio="none">
+          <path class="path-line" d="M-80 620 C 250 410, 315 755, 560 475 S 970 145, 1510 290" fill="none" stroke="rgba(234,216,162,.26)" stroke-width="1.2"/>
+          <path class="path-line" d="M-20 250 C 210 130, 435 225, 610 340 S 990 680, 1460 520" fill="none" stroke="rgba(118,166,190,.22)" stroke-width="1.1"/>
+          <path class="path-line" d="M260 980 C 360 640, 600 680, 770 435 S 1120 200, 1280 -80" fill="none" stroke="rgba(234,216,162,.18)" stroke-width="1"/>
+          <circle cx="560" cy="475" r="4" fill="rgba(234,216,162,.72)"/>
+          <circle cx="890" cy="300" r="3" fill="rgba(234,216,162,.58)"/>
+          <circle cx="610" cy="340" r="3" fill="rgba(118,166,190,.62)"/>
+        </svg>
+      </div>
+      <div class="container hero-grid">
+        <div class="hero-content reveal">
+          <p class="kicker">Future business leader</p>
+          <h1 class="hero-name">SANCIA ANN SABU</h1>
+          <h2>Curious About Everything. Focused On Creating Impact.</h2>
+          <p class="hero-copy">I enjoy exploring ideas across business, strategy, finance, and leadership while continuously learning, growing, and solving meaningful problems.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#journey">Explore My Journey</a>
+            <a class="button secondary" href="#contact">Contact Me</a>
+          </div>
+        </div>
+        <div class="portrait-card reveal">
+          <div class="portrait" role="img" aria-label="Professional headshot for Sancia Ann Sabu">
+            <img src="assets/headshot.png" alt="" />
+          </div>
+          <p class="portrait-note">Professional headshot</p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- About section -->
+      <section id="about">
+        <div class="container about-layout">
+          <div class="about-stat glass reveal">
+            <span>Across</span>
+            <strong>4</strong>
+            <p>domains of curiosity: business, strategy, finance, and leadership.</p>
+          </div>
+          <div class="about-copy glass reveal">
+            <div class="section-heading">
+              <p class="kicker">About me</p>
+              <h2>Building breadth with intention.</h2>
+            </div>
+            <p>Sancia Ann Sabu is a BCom Honours graduate from Christ University, a former Foreign Exchange Operations professional at Wells Fargo, and a first-year MBA student at XIM Bhubaneswar.</p>
+            <p>Her journey is shaped by curiosity, discipline, and an interest in how thoughtful decisions can improve organizations. She is passionate about strategy, leadership, problem solving, and learning across disciplines with the goal of contributing meaningfully wherever she works.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Education timeline -->
+      <section id="journey">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="kicker">Education journey</p>
+            <h2>A timeline of growth, responsibility, and ambition.</h2>
+            <p>Each stage added a new layer: academic discipline, leadership exposure, team contribution, and a growing interest in business impact.</p>
+          </div>
+          <div class="timeline">
+            <article class="timeline-item reveal">
+              <div class="timeline-dot">01</div>
+              <div class="timeline-card glass">
+                <h3>School Journey</h3>
+                <p>Graduated in 2021 with 97.4%, while taking on leadership and event responsibilities.</p>
+                <ul>
+                  <li>House Captain</li>
+                  <li>Head of Judges for an inter-school event</li>
+                </ul>
+              </div>
+            </article>
+            <article class="timeline-item reveal">
+              <div class="timeline-dot">02</div>
+              <div class="timeline-card glass">
+                <h3>Christ University, Bangalore</h3>
+                <p>Bachelor of Commerce (Honours), completed with First Class with Distinction.</p>
+                <ul>
+                  <li>Merit Scholarship Recipient</li>
+                  <li>Sponsorship Team Member</li>
+                </ul>
+              </div>
+            </article>
+            <article class="timeline-item reveal">
+              <div class="timeline-dot">03</div>
+              <div class="timeline-card glass">
+                <h3>XIM Bhubaneswar</h3>
+                <p>MBA student building skills in business, strategy, leadership, and management.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Professional experience -->
+      <section id="experience">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="kicker">Professional experience</p>
+            <h2>Corporate exposure with operational precision.</h2>
+          </div>
+          <article class="experience-card glass reveal">
+            <div class="experience-title">
+              <span>1 year</span>
+              <h3>Wells Fargo</h3>
+              <p>Foreign Exchange Operations</p>
+            </div>
+            <div class="experience-details">
+              <div class="pill-row">
+                <span class="pill">Global environment</span>
+                <span class="pill">Process management</span>
+                <span class="pill">Operational efficiency</span>
+              </div>
+              <div class="impact-grid">
+                <div class="impact"><strong>Accuracy</strong>Maintained focus on detail in high-trust operational workflows.</div>
+                <div class="impact"><strong>Problem solving</strong>Approached daily exceptions and process needs with structured thinking.</div>
+                <div class="impact"><strong>Collaboration</strong>Worked with teams in a global corporate setting.</div>
+                <div class="impact"><strong>Process ownership</strong>Developed discipline around consistency, controls, and execution.</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Skills section -->
+      <section id="skills">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="kicker">Skills</p>
+            <h2>Capabilities that compound over time.</h2>
+          </div>
+          <div class="skills-grid reveal">
+            <div class="skill glass" style="--level: 92%"><h3>Problem Solving</h3><div class="skill-bar"><div class="skill-fill"></div></div></div>
+            <div class="skill glass" style="--level: 88%"><h3>Leadership</h3><div class="skill-bar"><div class="skill-fill"></div></div></div>
+            <div class="skill glass" style="--level: 84%"><h3>Storytelling</h3><div class="skill-bar"><div class="skill-fill"></div></div></div>
+            <div class="skill glass" style="--level: 90%"><h3>Teamwork</h3><div class="skill-bar"><div class="skill-fill"></div></div></div>
+            <div class="skill glass" style="--level: 86%"><h3>Decision Making</h3><div class="skill-bar"><div class="skill-fill"></div></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interests section -->
+      <section id="interests">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="kicker">My interests</p>
+            <h2>A curious life beyond the classroom.</h2>
+          </div>
+          <div class="cards-grid">
+            <article class="interest-card glass reveal"><h3>Dance</h3><p>Expression, rhythm, and discipline in motion.</p></article>
+            <article class="interest-card glass reveal"><h3>Acting</h3><p>Understanding people, emotion, and presence.</p></article>
+            <article class="interest-card glass reveal"><h3>Workouts</h3><p>Consistency, energy, and self-respect.</p></article>
+            <article class="interest-card glass reveal"><h3>Travel</h3><p>New places, perspectives, and cultural curiosity.</p></article>
+            <article class="interest-card glass reveal"><h3>Movies</h3><p>Stories that make ideas more memorable.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ask me anything -->
+      <section id="questions">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="kicker">Ask me anything</p>
+            <h2>Questions that reveal how I think.</h2>
+          </div>
+          <div class="accordion reveal">
+            <div class="accordion-item active">
+              <button class="accordion-button" type="button">What excites you the most?<span class="accordion-icon">+</span></button>
+              <div class="accordion-panel"><p>I am excited by the moment when ideas connect across fields and turn into practical decisions that can help people, teams, or organizations move forward.</p></div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-button" type="button">Why did you choose business?<span class="accordion-icon">+</span></button>
+              <div class="accordion-panel"><p>Business brings together people, numbers, strategy, communication, and execution. I chose it because it rewards both analytical thinking and human understanding.</p></div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-button" type="button">What kind of problems do you enjoy solving?<span class="accordion-icon">+</span></button>
+              <div class="accordion-panel"><p>I enjoy solving problems that require structure, judgment, and collaboration, especially when the answer is not obvious at first glance.</p></div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-button" type="button">Where do you see yourself in the future?<span class="accordion-icon">+</span></button>
+              <div class="accordion-panel"><p>I see myself growing into a strategic leadership role where I can help organizations make thoughtful decisions and create positive, lasting impact.</p></div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-button" type="button">What motivates you?<span class="accordion-icon">+</span></button>
+              <div class="accordion-panel"><p>Learning, responsibility, meaningful work, and the chance to become better than I was yesterday motivate me to keep moving forward.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Future aspirations -->
+      <section id="aspirations">
+        <div class="container">
+          <div class="aspiration glass reveal">
+            <h2>What I'm Working Towards</h2>
+            <p>I aspire to help businesses grow sustainably through thoughtful strategy and innovation. I am particularly interested in working with organizations that solve meaningful problems, create positive impact, and contribute to a better future for people and the environment.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact section -->
+      <section id="contact">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="kicker">Contact</p>
+            <h2>Open to conversations, opportunities, and ideas.</h2>
+          </div>
+          <div class="contact-grid">
+            <a class="contact-card glass reveal" href="#" aria-label="LinkedIn placeholder"><span>LinkedIn</span><strong>Add LinkedIn URL</strong></a>
+            <a class="contact-card glass reveal" href="mailto:your.email@example.com"><span>Email</span><strong>your.email@example.com</strong></a>
+            <a class="contact-card glass reveal" href="#" aria-label="Resume placeholder"><span>Resume</span><strong>Add resume link</strong></a>
+            <a class="contact-card glass reveal" href="tel:+910000000000"><span>Phone</span><strong>+91 00000 00000</strong></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>Thank you for visiting. This website reflects my journey, experiences, interests, and aspirations. I am always excited to learn, connect, and explore new opportunities.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle
+    const toggle = document.querySelector(".theme-toggle");
+    const savedTheme = localStorage.getItem("sancia-theme");
+    if (savedTheme === "light") document.body.classList.add("light");
+
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      localStorage.setItem("sancia-theme", document.body.classList.contains("light") ? "light" : "dark");
+    });
+
+    // Headshot fallback
+    const portrait = document.querySelector(".portrait");
+    const portraitImage = portrait.querySelector("img");
+    portraitImage.addEventListener("load", () => portrait.classList.add("has-photo"));
+    portraitImage.addEventListener("error", () => portrait.classList.remove("has-photo"));
+
+    // Scroll reveal animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+
+    // Accordion interactions
+    document.querySelectorAll(".accordion-item").forEach((item) => {
+      const button = item.querySelector(".accordion-button");
+      const panel = item.querySelector(".accordion-panel");
+
+      const setHeight = () => {
+        panel.style.maxHeight = item.classList.contains("active") ? `${panel.scrollHeight}px` : "0px";
+      };
+
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".accordion-item").forEach((other) => {
+          if (other !== item) {
+            other.classList.remove("active");
+            other.querySelector(".accordion-panel").style.maxHeight = "0px";
+          }
+        });
+        item.classList.toggle("active");
+        setHeight();
+      });
+
+      setHeight();
+    });
+  </script>
+</body>
+</html>
